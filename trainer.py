@@ -48,6 +48,7 @@ def compute_metrics(logits_and_labels):
 # ---------------------------------------------------------------------------
 training_data = pd.read_csv('data-1.csv')
 df = pd.DataFrame(training_data, columns=['text', 'labels'])
+df['labels'] = df.apply(lambda r: categories_to_id[r['labels']], axis=1)
 features = Features({'text': Value('string'),
                      'labels': ClassLabel(names=list(categories.keys()))})
 
